@@ -1,32 +1,5 @@
-<div align="center">
-  <img src="./public/assets/WORKFLOW_ap.png" alt="Logo" width="100%" height="100%">
-</div>
-
-<br />
-
-
-<div align="center">
-  <p >Home Page</p>
-  <img src="./public/assets/home-page.png" alt="Logo" width="100%" height="100%">
-
-</div>
 
 # Deploy Netflix Clone on Cloud using Jenkins - DevSecOps Project!
-
-
-
- ## Implementation Links:
- [Phase 1 : Initial Setup and Deployment on AWS](https://github.com/abhishekporwal-836/Netflix-Clone-DevSecOps-Project/blob/112883b70bb8ef5d05bc17906f978b92507e549b/Phase%20files/Phase1_Initial%20Setup%20and%20Deployment.pdf)
-
- [Phase 2: Security](https://github.com/abhishekporwal-836/Netflix-Clone-DevSecOps-Project/blob/697c80051794e19f07e099a06215896b44c70fc4/Phase%20files/Phase2_Security.pdf)
- 
- [Phase 3 : CI/CD Setup](https://github.com/abhishekporwal-836/Netflix-Clone-DevSecOps-Project/blob/697c80051794e19f07e099a06215896b44c70fc4/Phase%20files/Phase3_CICD_jenkins.pdf)
- 
- [Phase 4 : Monitoring using Prometheus and Grafana](https://github.com/abhishekporwal-836/Netflix-Clone-DevSecOps-Project/blob/697c80051794e19f07e099a06215896b44c70fc4/Phase%20files/Phase4_Monitoring.pdf)
- 
- [Phase 5 : Notification through mails ](https://github.com/abhishekporwal-836/Netflix-Clone-DevSecOps-Project/blob/697c80051794e19f07e099a06215896b44c70fc4/Phase%20files/Phase5_Notifcation.pdf)
-# Video of Implementation: [Click here! ](https://drive.google.com/file/d/1L6VnKgnK6m0KWQ2q6e6ivXxmuXu0Qaw1/view?usp=sharing)
-
 
 
 ### **Phase 1: Initial Setup and Deployment**
@@ -325,20 +298,20 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build --build-arg TMDB_V3_API_KEY=<myapikey> -t netflix ."
-                       sh "docker tag netflix abhishekporwal836/netflix:latest "
-                       sh "docker push abhishekporwal836/netflix:latest "
+                       sh "docker tag netflix sakshirathod8531/netflix:latest "
+                       sh "docker push sakshirathod8531/netflix:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image abhihsekporwal836/netflix:latest > trivyimage.txt" 
+                sh "trivy image sakshirathod8531/netflix:latest > trivyimage.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d netflix -p 8081:80 abhishekporwal836/netflix:latest'
+                sh 'docker run -d netflix -p 8081:80 sakshirathod8531/netflix:latest'
             }
         }
     }
